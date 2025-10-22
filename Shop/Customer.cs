@@ -2,18 +2,70 @@ namespace Shop;
 
 public class Customer: Person
 {
-    public Customer(string name,  int money) : base(name, money){}
-
-    public bool CanBuy(Product product)
+    public Customer(string name, decimal money) : base(name, money)
     {
-        return Money >= product.Price;
+        _basket = new List<Product>();
+        _bag = new List<Product>();
+    }
+    
+    private List<Product> _basket;
+    private List<Product> _bag;
+    
+    public IReadOnlyList<Product> Basket => _basket;
+    public IReadOnlyList<Product> Bag => _bag;
+
+    public bool CanBuyBasket()
+    {
+        decimal total = 0;
+
+        foreach (Product product in _basket)
+        {
+            total += product.Price;
+        }
+        
+        return total >= Money;
     }
 
-    public void BuyProduct(Product product)
+    public decimal GetBasketTotal()
     {
-        Products.Add(product);
-        DecreaseMoney(product.Price);
-        Console.WriteLine($"{Name} купил {product.Title} за {product.Price} руб.");
+        decimal total = 0;
+
+        foreach (Product product in _basket)
+        {
+            total += product.Price;
+        }
+        
+        return total;
+    }
+
+    public void AddProductToBasket(Product product)
+    {
+        _basket.Add(product);
+    }
+
+    public void RemoveProductFromBasket(Product product)
+    {
+        _basket.Remove(product);
+    }
+
+    public void MoveBasketToBag()
+    {
+        _bag.AddRange(_basket);
+        _basket.Clear();
+    }
+
+    public bool TryBuyBasket()
+    {
+        decimal total = GetBasketTotal();
+
+        if (Money >= total)
+        {
+            DecreaseMoney(total);
+            MoveBasketToBag();
+            return true;
+        }
+        
+        return false;
     }
     
     public override void ShowProducts()

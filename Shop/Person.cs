@@ -2,7 +2,7 @@ namespace Shop;
 
 public abstract class Person
 {
-    public Person(string name, int money)
+    public Person(string name, decimal money)
     {
         Name = name;
         Money = money;
@@ -10,7 +10,7 @@ public abstract class Person
     }
     
     public string Name { get; private set; }
-    public int Money { get; private set; }
+    public decimal Money { get; private set; }
     protected List<Product> Products { get; private set; }
     
     protected void IncreaseMoney(int amount)
@@ -18,7 +18,7 @@ public abstract class Person
         Money += amount;
     }
 
-    protected void DecreaseMoney(int amount)
+    protected void DecreaseMoney(decimal amount)
     {
         Money -= amount;
     }
