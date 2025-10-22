@@ -23,7 +23,7 @@ public class Customer: Person
             total += product.Price;
         }
         
-        return total >= Money;
+        return Money >= total;
     }
 
     public decimal GetBasketTotal()
@@ -68,17 +68,17 @@ public class Customer: Person
         return false;
     }
     
-    public override void ShowProducts()
+    public override void ShowBag()
     {
         Console.WriteLine($"\nУ {Name} куплены товары:");
 
-        if (Products.Count == 0)
+        if (_bag.Count == 0)
         {
             Console.WriteLine("Пока что нет купленных товаров.");
         }
         else
         {
-            foreach (var product in Products)
+            foreach (var product in _bag)
             {
                 Console.WriteLine($"{product.Title}");
             }

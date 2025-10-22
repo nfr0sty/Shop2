@@ -23,5 +23,5 @@ public abstract class Person
         Money -= amount;
     }
 
-    public abstract void ShowProducts();
+    public abstract void ShowBag();
 }
