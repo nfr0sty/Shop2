@@ -117,4 +117,27 @@ public static class ConsoleDialog
 
         return value;
     }
+    
+    public static void ShowRemoveProduct(Customer customer, Product product)
+    {
+        Console.WriteLine($"{customer.Name} выкинул {product.Title} из корзины. Оставшиеся деньги: {customer.Money}");
+    }
+    
+    public static void ShowPurchaseSuccess(Customer customer)
+    {
+        Console.WriteLine($"{customer.Name} успешно купил корзину за {customer.GetBasketTotal()} руб.");
+        Console.WriteLine("Товары перемещены в сумку:");
+        
+        foreach (var product in customer.Bag)
+        {
+            Console.WriteLine($" - {product.Title}");
+        }
+        
+        Console.WriteLine($"Осталось денег: {customer.Money} руб.");
+    }
+
+    public static void ShowPurchaseFailure(Customer customer)
+    {
+        Console.WriteLine($"{customer.Name} не смог оплатить корзину. Он ушёл ни с чем.");
+    }
 }
