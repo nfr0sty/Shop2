@@ -38,6 +38,11 @@ public class Supermarket
         if (customer.TryBuyBasket())
         {
             _earnedMoney += customer.GetBasketTotal();
+            ConsoleDialog.ShowPurchaseSuccess(customer);
+        }
+        else
+        {
+            ConsoleDialog.ShowPurchaseFailure(customer);
         }
     }
     
@@ -46,5 +51,6 @@ public class Supermarket
         int productIndex = UserUtils.GenerateRandomNumber(customer.Basket.Count);
         Product productToRemove = customer.Basket[productIndex];
         customer.RemoveProductFromBasket(productToRemove);
+        ConsoleDialog.ShowRemoveProduct(customer, productToRemove);
     }
 }
