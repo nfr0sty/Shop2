@@ -34,10 +34,12 @@ public class Supermarket
         {
             RemoveRandomProductFromCustomerBasket(customer);
         }
-
+        
+        decimal basketTotal = customer.GetBasketTotal();
+        
         if (customer.TryBuyBasket())
         {
-            _earnedMoney += customer.GetBasketTotal();
+            _earnedMoney += basketTotal;
             ConsoleDialog.ShowPurchaseSuccess(customer);
         }
         else
