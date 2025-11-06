@@ -13,7 +13,7 @@ public abstract class Person
     public decimal Money { get; private set; }
     protected List<Product> Products { get; private set; }
     
-    protected void IncreaseMoney(int amount)
+    protected void IncreaseMoney(decimal amount)
     {
         Money += amount;
     }
