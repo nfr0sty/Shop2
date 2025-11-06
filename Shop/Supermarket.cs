@@ -2,6 +2,8 @@ namespace Shop;
 
 public class Supermarket
 {
+    private const int RemoveProductDelayMs = 500;
+    private const int ServeCustomerDelayMs = 1000;
     private List<Product> _products;
     private Queue<Customer> _customers;
     private decimal _earnedMoney;
@@ -33,6 +35,7 @@ public class Supermarket
         while (!customer.CanBuyBasket() && customer.Basket.Count > 0)
         {
             RemoveRandomProductFromCustomerBasket(customer);
+            Thread.Sleep(RemoveProductDelayMs);
         }
         
         decimal basketTotal = customer.GetBasketTotal();
@@ -40,12 +43,14 @@ public class Supermarket
         if (customer.TryBuyBasket())
         {
             _earnedMoney += basketTotal;
-            ConsoleDialog.ShowPurchaseSuccess(customer);
+            ConsoleDialog.ShowPurchaseSuccess(customer, basketTotal);
         }
         else
         {
             ConsoleDialog.ShowPurchaseFailure(customer);
         }
+        
+        Thread.Sleep(ServeCustomerDelayMs);
     }
     
     private void RemoveRandomProductFromCustomerBasket(Customer customer)

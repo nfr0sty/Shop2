@@ -123,19 +123,20 @@ public static class ConsoleDialog
         Console.WriteLine($"{customer.Name} выкинул {product.Title} из корзины. Оставшиеся деньги: {customer.Money}");
     }
     
-    public static void ShowPurchaseSuccess(Customer customer)
+    public static void ShowPurchaseSuccess(Customer customer, decimal total)
     {
-        Console.WriteLine($"{customer.Name} успешно купил корзину за {customer.GetBasketTotal()} руб.");
+        Console.WriteLine("--------------------------------------------------");
+        Console.WriteLine($"{customer.Name} успешно купил корзину за {total} руб.");
         Console.WriteLine("Товары перемещены в сумку:");
-        
+    
         foreach (var product in customer.Bag)
         {
             Console.WriteLine($" - {product.Title}");
         }
-        
-        Console.WriteLine($"Осталось денег: {customer.Money} руб.");
+    
+        Console.WriteLine($"| Осталось денег: {customer.Money} руб. |\n");
     }
-
+    
     public static void ShowPurchaseFailure(Customer customer)
     {
         Console.WriteLine($"{customer.Name} не смог оплатить корзину. Он ушёл ни с чем.");
@@ -145,12 +146,12 @@ public static class ConsoleDialog
     {
         Console.WriteLine($"\n=== Статистика супермаркета ===");
         Console.WriteLine($"Заработано: {supermarket.EarnedMoney} руб.");
-        Console.WriteLine($"Осталось клиентов в очереди: {supermarket.Customers.Count}");
+        Console.WriteLine($"Осталось клиентов в очереди: {supermarket.Customers.Count} \n");
     }
 
     public static void ShowCustomerStatus(Customer customer)
     {
-        Console.WriteLine($"Статус клиента: {customer.Name}");
+        Console.WriteLine($"\nСтатус клиента: {customer.Name}");
         Console.WriteLine($"Остаток денег: {customer.Money} руб.");
         Console.WriteLine("Купленные товары:");
         foreach (var product in customer.Bag)
