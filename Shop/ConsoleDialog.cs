@@ -140,4 +140,22 @@ public static class ConsoleDialog
     {
         Console.WriteLine($"{customer.Name} не смог оплатить корзину. Он ушёл ни с чем.");
     }
+    
+    public static void ShowSupermarketStats(Supermarket supermarket)
+    {
+        Console.WriteLine($"\n=== Статистика супермаркета ===");
+        Console.WriteLine($"Заработано: {supermarket.EarnedMoney} руб.");
+        Console.WriteLine($"Осталось клиентов в очереди: {supermarket.Customers.Count}");
+    }
+
+    public static void ShowCustomerStatus(Customer customer)
+    {
+        Console.WriteLine($"Статус клиента: {customer.Name}");
+        Console.WriteLine($"Остаток денег: {customer.Money} руб.");
+        Console.WriteLine("Купленные товары:");
+        foreach (var product in customer.Bag)
+        {
+            Console.WriteLine($" - {product.Title}");
+        }
+    }
 }
