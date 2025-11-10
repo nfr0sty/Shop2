@@ -7,6 +7,8 @@ public class Supermarket
     private List<Product> _products;
     private Queue<Customer> _customers;
     private decimal _earnedMoney;
+    private ConsoleDialog _consoleDialog = new ConsoleDialog();
+
 
     public Supermarket(List<Product> products)
     {
@@ -16,7 +18,7 @@ public class Supermarket
     }
     
     public IReadOnlyList<Product> Products => _products;
-    public IReadOnlyCollection<Customer> Customers => _customers;
+    public int CustomersCount => _customers.Count;
     
     public decimal EarnedMoney => _earnedMoney;
     
@@ -43,11 +45,11 @@ public class Supermarket
         if (customer.TryBuyBasket())
         {
             _earnedMoney += basketTotal;
-            ConsoleDialog.ShowPurchaseSuccess(customer, basketTotal);
+            _consoleDialog.ShowPurchaseSuccess(customer, basketTotal);
         }
         else
         {
-            ConsoleDialog.ShowPurchaseFailure(customer);
+            _consoleDialog.ShowPurchaseFailure(customer);
         }
         
         Thread.Sleep(ServeCustomerDelayMs);
@@ -58,6 +60,6 @@ public class Supermarket
         int productIndex = UserUtils.GenerateRandomNumber(customer.Basket.Count);
         Product productToRemove = customer.Basket[productIndex];
         customer.RemoveProductFromBasket(productToRemove);
-        ConsoleDialog.ShowRemoveProduct(customer, productToRemove);
+        _consoleDialog.ShowRemoveProduct(customer, productToRemove);
     }
 }

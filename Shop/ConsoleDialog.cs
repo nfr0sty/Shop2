@@ -1,8 +1,8 @@
 namespace Shop;
 
-public static class ConsoleDialog
+public class ConsoleDialog
 {
-    public static int ReadInt(string prompt)
+    public int ReadInt(string prompt)
     {
         bool isWork = true;
         int number = 0;
@@ -30,7 +30,7 @@ public static class ConsoleDialog
         return number;
     }
 
-    public static int ReadIntInRange(string prompt, int min, int max)
+    public int ReadIntInRange(string prompt, int min, int max)
     {
         bool isWork = true;
         int number = 0;
@@ -51,7 +51,7 @@ public static class ConsoleDialog
         return number;
     }
 
-    public static void ReadRange(out int min, out int max, string promptMin, string promptMax)
+    public void ReadRange(out int min, out int max, string promptMin, string promptMax)
     {
         bool isWork = true;
         min = 0;
@@ -72,7 +72,7 @@ public static class ConsoleDialog
         }
     }
 
-    public static bool ReadYesNo(string prompt)
+    public bool ReadYesNo(string prompt)
     {
         string[] yes = { "y", "yes", "д", "да", "ага", "lf" };
         string[] no  = { "n", "no", "н", "нет", "неа", "ytn" };
@@ -95,7 +95,7 @@ public static class ConsoleDialog
         return false;
     }
     
-    public static string ReadNonEmptyString(string prompt)
+    public string ReadNonEmptyString(string prompt)
     {
         bool isWork = true;
         string value = string.Empty;
@@ -118,12 +118,12 @@ public static class ConsoleDialog
         return value;
     }
     
-    public static void ShowRemoveProduct(Customer customer, Product product)
+    public void ShowRemoveProduct(Customer customer, Product product)
     {
         Console.WriteLine($"{customer.Name} выкинул {product.Title} из корзины. Оставшиеся деньги: {customer.Money}");
     }
     
-    public static void ShowPurchaseSuccess(Customer customer, decimal total)
+    public void ShowPurchaseSuccess(Customer customer, decimal total)
     {
         Console.WriteLine("--------------------------------------------------");
         Console.WriteLine($"{customer.Name} успешно купил корзину за {total} руб.");
@@ -137,19 +137,19 @@ public static class ConsoleDialog
         Console.WriteLine($"| Осталось денег: {customer.Money} руб. |\n");
     }
     
-    public static void ShowPurchaseFailure(Customer customer)
+    public void ShowPurchaseFailure(Customer customer)
     {
         Console.WriteLine($"{customer.Name} не смог оплатить корзину. Он ушёл ни с чем.");
     }
     
-    public static void ShowSupermarketStats(Supermarket supermarket)
+    public void ShowSupermarketStats(Supermarket supermarket)
     {
         Console.WriteLine($"\n=== Статистика супермаркета ===");
         Console.WriteLine($"Заработано: {supermarket.EarnedMoney} руб.");
-        Console.WriteLine($"Осталось клиентов в очереди: {supermarket.Customers.Count} \n");
+        Console.WriteLine($"Осталось клиентов в очереди: {supermarket.CustomersCount} \n");
     }
 
-    public static void ShowCustomerStatus(Customer customer)
+    public void ShowCustomerStatus(Customer customer)
     {
         Console.WriteLine($"\nСтатус клиента: {customer.Name}");
         Console.WriteLine($"Остаток денег: {customer.Money} руб.");

@@ -2,28 +2,21 @@ namespace Shop;
 
 public class Customer: Person
 {
+    private List<Product> _basket;
+    private List<Product> _bag;
+
     public Customer(string name, decimal money) : base(name, money)
     {
         _basket = new List<Product>();
         _bag = new List<Product>();
     }
-    
-    private List<Product> _basket;
-    private List<Product> _bag;
-    
+
     public IReadOnlyList<Product> Basket => _basket;
     public IReadOnlyList<Product> Bag => _bag;
 
     public bool CanBuyBasket()
     {
-        decimal total = 0;
-
-        foreach (Product product in _basket)
-        {
-            total += product.Price;
-        }
-        
-        return Money >= total;
+        return Money >= GetBasketTotal();
     }
 
     public decimal GetBasketTotal()
